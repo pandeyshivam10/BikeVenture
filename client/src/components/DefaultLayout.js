@@ -1,20 +1,16 @@
 import React from "react";
-import { Button, Dropdown, Space } from "antd";
+import { Button, Dropdown, Row, Space, Col } from "antd";
 import { Link } from "react-router-dom";
 
 import { message } from "antd";
 
 function DefaultLayout(props) {
-
-  
   const logout = () => {
     localStorage.removeItem("user");
     message.success("Logged Out Succesfull");
   };
 
   const user = JSON.parse(localStorage.getItem("user"));
-
-  console.log(user);
   const items = [
     {
       key: "1",
@@ -53,24 +49,28 @@ function DefaultLayout(props) {
   return (
     <div>
       <div className="header bs1">
-        <div className="d-flex justify-content-between">
-          <h1 className="heading">BikeVenture</h1>
-          {user ? (
-            <Space direction="vertical">
-              <Space wrap>
-                <Dropdown menu={{ items }} placement="bottomRight">
-                  <Button className="loginbtn">{user._id}</Button>
-                </Dropdown>
-              </Space>
-            </Space>
-          ) : (
-            <Space wrap>
-              <Button className="loginbtn">
-                <Link to="/login">Log In</Link>
-              </Button>
-            </Space>
-          )}
-        </div>
+        <Row gutter={16} justify="center">
+          <Col lg={20} sm={24} xs={24}>
+            <div className="d-flex justify-content-between">
+              <h1 className="heading">BikeVenture</h1>
+              {user ? (
+                <Space direction="vertical">
+                  <Space wrap>
+                    <Dropdown menu={{ items }} placement="bottomRight">
+                      <Button className="loginbtn">{user.username}</Button>
+                    </Dropdown>
+                  </Space>
+                </Space>
+              ) : (
+                <Space wrap>
+                  <Button className="loginbtn">
+                    <Link to="/login">Log In</Link>
+                  </Button>
+                </Space>
+              )}
+            </div>
+          </Col>
+        </Row>
       </div>
       <div className="content">{props.children}</div>
     </div>

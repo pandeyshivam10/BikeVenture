@@ -5,6 +5,7 @@ import { getAllBikes } from "../redux/actions/bikeActions";
 
 import { Button, Row, Col } from "antd";
 import Loader from "../components/Loader";
+import { Link } from "react-router-dom";
 
 function Home() {
   const { bikes } = useSelector((state) => state.custom);
@@ -34,7 +35,7 @@ function Home() {
                     </div>
                     <div>
                       <Button type="primary" className="btn1">
-                        Book Now
+                        <Link to = {`/booking/${bike._id}`}>Book Now</Link>
                       </Button>
                     </div>
                   </div>
