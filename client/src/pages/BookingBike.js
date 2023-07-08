@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllBikes } from "../redux/actions/bikeActions";
 import Loader from "../components/Loader";
+import { Row, Col, Divider } from "antd";
 
 function BookingBike() {
   const { bikes } = useSelector((state) => state.custom);
@@ -27,18 +28,56 @@ function BookingBike() {
     }
   }, [bikes, bikeid]);
 
+  let bikeInfo = null;
+  let selectedTime = null;
+  if (bike) {
+    bikeInfo = (
+      <>
+        <div className="text-right">
+          <h1 class="fancy">Bike Info</h1>
+          <p>{bike.name}</p>
+          <p>{bike.rentPerHour} Rent/Hour</p>
+          <p> Fuel : {bike.fuelType} </p>
+          <p> Max Persons : {bike.capacity} </p>
+        </div>
+      </>
+    );
+
+    selectedTime = (
+      <>
+        <div className="text-right">
+          <h1 class="fancy">Selected Time Slot</h1>
+          
+        </div>
+      </>
+    );
+  }
+
   return (
     <DefaultLayout>
-      {loading ? (
-        <div><Loader/></div>
-      ) : bike ? (
-        <div>
-          <div>Booking Car Page</div>
-          <h1>Car Name = {bike.name}</h1>
-        </div>
-      ) : (
-        <div>Car not found</div>
-      )}
+      {loading && <Loader />}
+
+      <div>
+        <Row
+          justify="center"
+          className="d-flex align-items-center"
+          style={{ minHeight: "90vh" }}
+        >
+          <Col lg={10} sm={24} xs={24}>
+            {bike && (
+              <img
+                src={bike.image}
+                className="bikeimg2 bs-1"
+                alt="loading..."
+              />
+            )}
+          </Col>
+          <Col lg={10} sm={24} xs={24}>
+            {bikeInfo}
+            {selectedTime}
+          </Col>
+        </Row>
+      </div>
     </DefaultLayout>
   );
 }

@@ -5,7 +5,7 @@ body {
   font-family: "Nunito Sans", sans-serif !important;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: azure;
+  /* background-color: azure; */
 }
 
 code {
@@ -37,7 +37,7 @@ h1 {
 }
 p {
   margin: 5px !important;
-  text-align: left;
+  
   padding: 0px;
 }
 
@@ -147,3 +147,41 @@ p {
   object-fit: cover;
   width: 100%;
 }
+
+
+.bikeimg2{
+  object-fit: cover;
+  height:494px;
+  border-radius: 10px;
+  width: 632px; 
+}
+
+
+
+
+.fancy {
+  --b: 6px;   /* control the border thickness */
+  --w: 80px;  /* control the width of the line*/
+  --g: 15px;  /* control the gap */
+  --c: #0B486B;
+ 
+  width: fit-content;
+  padding: 0 1em;
+  line-height: 1 rem;
+  border: 1px solid;
+  color: #fff;
+  background: 
+    conic-gradient(from   45deg at left ,var(--c) 25%,#0000 0) 0,
+    conic-gradient(from -135deg at right,var(--c) 25%,#0000 0) 100%;
+  background-size: 51% 100%;
+  background-origin: border-box;
+  background-repeat: no-repeat;
+  border-image: 
+     linear-gradient(
+       #0000      calc(50% - var(--b)/2),
+       var(--c) 0 calc(50% + var(--b)/2),
+       #0000    0) 
+    1/0 var(--w)/calc(var(--w) + var(--g));
+  margin-inline: auto;
+}
+
