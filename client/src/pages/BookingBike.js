@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllBikes } from "../redux/actions/bikeActions";
 import Loader from "../components/Loader";
-import { Row, Col, Divider } from "antd";
+import { Row, Col, DatePicker } from "antd";
 
 function BookingBike() {
   const { bikes } = useSelector((state) => state.custom);

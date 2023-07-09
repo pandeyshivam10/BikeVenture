@@ -1,10 +1,12 @@
 const mongoose = require("mongoose");
 
 function connectDB() {
-  mongoose.connect(
-    "mongodb+srv://pandeyshivam10:shivam10@cluster0.sf4djnc.mongodb.net/bikeventure",
-    { useUnifiedTopology: true, useNewUrlParser: true }
-  );
+  const mongo_cred = process.env.MONGODB_CRED;
+
+  mongoose.connect(mongo_cred, {
+    useUnifiedTopology: true,
+    useNewUrlParser: true,
+  });
 
   const connection = mongoose.connection;
 
