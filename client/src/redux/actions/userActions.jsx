@@ -26,7 +26,7 @@ export const userRegister = (reqObj) => async (dispatch) => {
   dispatch({ type: "loading", payload: true });
 
   try {
-    const response = await api.post("/api/users/register", reqObj);
+   await api.post("/api/users/register", reqObj);
 
     message.success("Registration Successfull");
 
