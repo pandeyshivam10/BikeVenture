@@ -83,7 +83,7 @@ function BookingBike() {
       hour,
       totalAmount,
       driverRequire: driver,
-      bookedTimeSlots: (from, to),
+      bookedTimeSlots: { from, to },
     };
 
     dispatch(bookingBike(reqObj));
