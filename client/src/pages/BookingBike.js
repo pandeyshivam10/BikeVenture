@@ -46,11 +46,17 @@ function BookingBike() {
     if (e && e.length === 2) {
       const fromDate = e[0];
       const toDate = e[1];
-
-      setFrom(fromDate);
-      setTo(toDate);
-
-      setHour(toDate.diff(fromDate, "hours"));
+  
+      const fromTime = fromDate.format("MMM DD YYYY HH:mm");
+      const toTime = toDate.format("MMM DD YYYY HH:mm");
+  
+      setFrom(fromTime);
+      setTo(toTime);
+  
+      const diffInMilliseconds = toDate.diff(fromDate);
+      const diffInHours = Math.floor(diffInMilliseconds / (1000 * 60 * 60));
+  
+      setHour(diffInHours);
       setIsDatePickerSelected(true);
     } else {
       setFrom(null);
@@ -59,6 +65,9 @@ function BookingBike() {
       setIsDatePickerSelected(false);
     }
   }
+  
+  
+  
 
   let bikeInfo = null;
 
