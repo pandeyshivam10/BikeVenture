@@ -19,6 +19,9 @@ function Home() {
 
   return (
     <DefaultLayout>
+
+
+      
       {loading && <Loader />}
 
       <div>

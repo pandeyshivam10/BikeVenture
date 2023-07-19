@@ -95,6 +95,8 @@ function BookingBike() {
       bookedTimeSlots: { from, to },
     };
 
+    console.log("Bike ID:", bike._id);
+
     dispatch(bookingBike(reqObj));
   };
 
