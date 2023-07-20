@@ -1,9 +1,8 @@
 import axios from "axios";
 import { message } from "antd";
 const api = axios.create({
-  baseURL: "http://localhost:5000",
+  baseURL: "https://clear-rose-newt.cyclic.app",
 });
-
 export const userLogin = (reqObj) => async (dispatch) => {
   dispatch({ type: "loading", payload: true });
 
@@ -12,7 +11,7 @@ export const userLogin = (reqObj) => async (dispatch) => {
     localStorage.setItem("user", JSON.stringify(response.data));
     message.success("Login Success");
     setTimeout(() => {
-      window.location.href='/'
+      window.location.href = "/";
     }, 500);
 
     dispatch({ type: "loading", payload: false });
@@ -26,12 +25,12 @@ export const userRegister = (reqObj) => async (dispatch) => {
   dispatch({ type: "loading", payload: true });
 
   try {
-   await api.post("/api/users/register", reqObj);
+    await api.post("/api/users/register", reqObj);
 
     message.success("Registration Successfull");
 
     setTimeout(() => {
-      window.location.href='/login'
+      window.location.href = "/login";
     }, 500);
 
     dispatch({ type: "loading", payload: false });
