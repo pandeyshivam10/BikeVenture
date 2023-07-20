@@ -15,7 +15,6 @@
   "description": "this is my app",
   "main": "server.js",
   "devDependencies": {
-    "gh-pages": "^5.0.0",
     "nodemon": "^2.0.22"
   },
   "author": "",
