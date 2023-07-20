@@ -7,13 +7,17 @@
     "react-router-dom": "^6.14.0"
   },
   "scripts": {
-    "dev": "nodemon server.js"
+    "dev": "nodemon server.js",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "name": "bikeventure",
   "version": "1.0.0",
+  "homepage": "http://pandeyshivam10.github.io/BikeVenture",
   "description": "this is my app",
   "main": "server.js",
   "devDependencies": {
+    "gh-pages": "^5.0.0",
     "nodemon": "^2.0.22"
   },
   "author": "",
