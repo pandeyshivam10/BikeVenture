@@ -39,7 +39,7 @@ function BookingBike() {
 
   useEffect(() => {
     if (bike) {
-      setTotalAmount(hour * bike.rentPerHour + (driver && hour * 30));
+      setTotalAmount(hour * bike.rentPerHour + (driver ? hour * 30 : 0));
     }
   }, [driver, hour, bike]);
 
@@ -76,17 +76,18 @@ function BookingBike() {
           <h1 className="fancy">Bike Info</h1>
           <p>{bike.name}</p>
           <p>₹{bike.rentPerHour} Rent/Hour</p>
-          <p> Fuel: {bike.fuelType} </p>
-          <p> Max Persons: {bike.capacity} </p>
+          <p>Fuel: {bike.fuelType}</p>
+          <p>Max Persons: {bike.capacity}</p>
         </div>
       </>
     );
   }
 
   const stripePublishableKey =
-    "pk_test_51NVqR0SIqS8BsIk6en8v7YHELAeHu4ATaFxchE1T6QR5mfpjakM8CMy9ZaQDfBMQqsuXsIh2F3rIJFAcpR21rYTk00Z80cRUs7";
+    "pk_test_51NVqR0SIqS8BsIk6en8v7YHELAeHu4ATaFxchE1T6QR5mfpjakM8CMy9ZaQDfBMQqsuXsIh2F3rIJFAcpR21rYTk00Z80cRUs7"; // Replace with your actual Stripe publishable key
 
   const onToken = (token) => {
+    console.log("onToken", token);
     const reqObj = {
       token,
       user: JSON.parse(localStorage.getItem("user"))._id,
@@ -155,7 +156,7 @@ function BookingBike() {
                     <StripeCheckout
                       shippingAddress
                       token={onToken}
-                      currency="inr"
+                      currency="INR"
                       amount={totalAmount * 100}
                       stripeKey={stripePublishableKey}
                     >

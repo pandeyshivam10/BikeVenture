@@ -9,16 +9,21 @@ const stripe = require("stripe")(
 
 router.post("/bookbike", async (req, res) => {
   const { token } = req.body;
+  // console.log(req.body);
+  if (!token || !token.id) {
+    return res.status(400).json({ error: "Invalid token" });
+  }
+
   try {
     const customer = await stripe.customers.create({
       email: token.email,
-      source: token.id, 
+      source: token.id,
     });
 
-    const payment = await stripe.charges.create(
+    const payment = await stripe.paymentIntents.create(
       {
         amount: req.body.totalAmount * 100,
-        currency: "inr",
+        currency: "INR",
         customer: customer.id,
         receipt_email: token.email,
       },
@@ -28,8 +33,9 @@ router.post("/bookbike", async (req, res) => {
     );
 
     if (payment) {
-      req.body.transactionId = payment.source.id;
-      const newBooking = await bookingModel.create(req.body); 
+      req.body.transactionId = token.card.id;
+      const newBooking = new bookingModel(req.body);
+      await newBooking.save();
       const bike = await Bike.findOne({ _id: req.body.bike.toString() });
       bike.bookedTimeSlots.push(req.body.bookedTimeSlots);
       await bike.save();
@@ -38,7 +44,8 @@ router.post("/bookbike", async (req, res) => {
       return res.status(400).json({ error: "Payment failed" });
     }
   } catch (error) {
-    return res.status(400).json({ error: error.message });
+    console.error(error);
+    return res.status(500).json({ error: "Something went wrong" });
   }
 });
 
