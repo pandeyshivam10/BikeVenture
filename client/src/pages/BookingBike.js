@@ -5,6 +5,7 @@ import { getAllBikes } from "../redux/actions/bikeActions";
 import { Row, Col, DatePicker, Checkbox } from "antd";
 import DefaultLayout from "../components/DefaultLayout";
 import Loader from "../components/Loader";
+import StripeCheckout from "react-stripe-checkout";
 import { bookingBike } from "../redux/actions/bookingAction";
 
 const { RangePicker } = DatePicker;
@@ -46,16 +47,16 @@ function BookingBike() {
     if (e && e.length === 2) {
       const fromDate = e[0];
       const toDate = e[1];
-  
+
       const fromTime = fromDate.format("MMM DD YYYY HH:mm");
       const toTime = toDate.format("MMM DD YYYY HH:mm");
-  
+
       setFrom(fromTime);
       setTo(toTime);
-  
+
       const diffInMilliseconds = toDate.diff(fromDate);
       const diffInHours = Math.floor(diffInMilliseconds / (1000 * 60 * 60));
-  
+
       setHour(diffInHours);
       setIsDatePickerSelected(true);
     } else {
@@ -65,9 +66,6 @@ function BookingBike() {
       setIsDatePickerSelected(false);
     }
   }
-  
-  
-  
 
   let bikeInfo = null;
 
@@ -85,8 +83,12 @@ function BookingBike() {
     );
   }
 
-  const bookBike = () => {
+  const stripePublishableKey =
+    "pk_test_51NVqR0SIqS8BsIk6en8v7YHELAeHu4ATaFxchE1T6QR5mfpjakM8CMy9ZaQDfBMQqsuXsIh2F3rIJFAcpR21rYTk00Z80cRUs7";
+
+  const onToken = (token) => {
     const reqObj = {
+      token,
       user: JSON.parse(localStorage.getItem("user"))._id,
       bike: bike._id,
       hour,
@@ -94,8 +96,6 @@ function BookingBike() {
       driverRequire: driver,
       bookedTimeSlots: { from, to },
     };
-
-    console.log("Bike ID:", bike._id);
 
     dispatch(bookingBike(reqObj));
   };
@@ -151,9 +151,16 @@ function BookingBike() {
                     <h2>
                       Total Amount : <b>₹{totalAmount}/</b>
                     </h2>
-                    <button className="loginbtn" onClick={bookBike}>
-                      Book Now
-                    </button>
+
+                    <StripeCheckout
+                      shippingAddress
+                      token={onToken}
+                      currency="inr"
+                      amount={totalAmount * 100}
+                      stripeKey={stripePublishableKey}
+                    >
+                      <button className="loginbtn">Book Now</button>
+                    </StripeCheckout>
                   </div>
                 )}
               </div>
