@@ -1,4 +1,4 @@
-import { React, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import DefaultLayout from "../components/DefaultLayout";
 import { Row, Col, Form, Input, Button } from "antd";
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
@@ -7,10 +7,16 @@ import { useDispatch } from "react-redux";
 
 function Register() {
   const dispatch = useDispatch();
-  const handleSubmit = (e) => {
-    dispatch(userRegister(e));
-    console.log(e);
+
+  // Use the Ant Design useForm hook to get access to the form instance
+  const [form] = Form.useForm();
+
+  const handleSubmit = (values) => {
+    dispatch(userRegister(values));
+    console.log(values);
   };
+
+  const [passwordMatch, setPasswordMatch] = useState(true);
 
   useEffect(() => {
     document.body.style.overflow = "hidden";
@@ -18,6 +24,28 @@ function Register() {
       document.body.style.overflow = "auto";
     };
   }, []);
+
+  const passwordMinLength = 8;
+
+  const validateConfirmPassword = (_, value) => {
+    if (value && value !== form.getFieldValue("password")) {
+      setPasswordMatch(false);
+      return Promise.reject("Passwords do not match.");
+    }
+    setPasswordMatch(true);
+    return Promise.resolve();
+  };
+
+  const validatePassword = (_, value) => {
+    if (value && value.length < passwordMinLength) {
+      return Promise.reject(
+        `Password must be at least ${passwordMinLength} characters long.`
+      );
+    }
+
+    return Promise.resolve();
+  };
+
   return (
     <DefaultLayout>
       <div className="login">
@@ -31,6 +59,7 @@ function Register() {
           </Col>
           <Col lg={8} className="text-left">
             <Form
+              form={form} // Pass the form instance to the Form component
               onFinish={handleSubmit}
               className="login-form"
               layout="vertical"
@@ -49,6 +78,7 @@ function Register() {
                 name="password"
                 rules={[
                   { required: true, message: "Please input your password!" },
+                  { validator: validatePassword },
                 ]}
               >
                 <Input.Password
@@ -60,7 +90,10 @@ function Register() {
                 name="cpassword"
                 rules={[
                   { required: true, message: "Please input your password!" },
+                  { validator: validateConfirmPassword },
                 ]}
+                validateStatus={passwordMatch ? "success" : "error"}
+                help={!passwordMatch && "Passwords do not match."}
               >
                 <Input.Password
                   prefix={<LockOutlined />}

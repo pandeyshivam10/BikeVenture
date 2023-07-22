@@ -18,7 +18,7 @@ export const userLogin = (reqObj) => async (dispatch) => {
     dispatch({ type: "loading", payload: false });
   } catch (error) {
     console.log(error);
-    message.error("Something went Wrong");
+    message.error("Username and Password do not match");
     dispatch({ type: "loading", payload: false });
   }
 };
@@ -26,9 +26,21 @@ export const userRegister = (reqObj) => async (dispatch) => {
   dispatch({ type: "loading", payload: true });
 
   try {
+    const checkUsernameResponse = await api.post("/api/users/checkUsername", {
+      username: reqObj.username,
+    });
+
+    if (checkUsernameResponse.data.exists) {
+      // If the username exists, reject the registration and display an error message
+      message.error("Username is already taken");
+      dispatch({ type: "loading", payload: false });
+      return;
+    }
+
+    // If the username is available, proceed with the registration process
     await api.post("/api/users/register", reqObj);
 
-    message.success("Registration Successfull");
+    message.success("Registration Successful");
 
     setTimeout(() => {
       window.location.href = "/login";
@@ -37,7 +49,7 @@ export const userRegister = (reqObj) => async (dispatch) => {
     dispatch({ type: "loading", payload: false });
   } catch (error) {
     console.log(error);
-    message.error("Something went Wrong");
+    message.error("Something went wrong");
     dispatch({ type: "loading", payload: false });
   }
 };

@@ -5,7 +5,7 @@ body {
   font-family: "Nunito Sans", sans-serif !important;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  /* background-color: azure; */
+  background-color: azure;
 }
 
 code {
@@ -14,16 +14,16 @@ code {
 }
 
 .bs1 {
-  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
-    rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
-    rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 0.0625em 0.0625em,
+    rgba(0, 0, 0, 0.25) 0px 0.125em 0.5em,
+    rgba(255, 255, 255, 0.1) 0px 0px 0px 1px inset;
 }
 .bs-1 {
   box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px,
     rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
 }
 
-.loader{
+.loader {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -37,7 +37,7 @@ h1 {
 }
 p {
   margin: 5px !important;
-  
+
   padding: 0px;
 }
 
@@ -67,35 +67,32 @@ p {
   margin: 10px;
 }
 
-.login-form-button{
+.login-form-button {
   margin: 8px;
- 
 }
 
-.login-form{
+.login-form {
   background-color: rgb(23, 22, 21);
   margin-right: 50px;
   padding: 23px;
   margin-top: 50px;
   border-radius: 5px;
-  
-  
 }
-
 
 .loginbtn {
   margin: 10px;
   align-items: center;
   appearance: none;
-  background-color: #FCFCFD;
+  background-color: #fcfcfd;
   border-radius: 4px;
   border-width: 0;
-  box-shadow: rgba(45, 35, 66, 0.4) 0 2px 4px,rgba(45, 35, 66, 0.3) 0 7px 13px -3px,#D6D6E7 0 -3px 0 inset;
+  box-shadow: rgba(45, 35, 66, 0.4) 0 2px 4px,
+    rgba(45, 35, 66, 0.3) 0 7px 13px -3px, #d6d6e7 0 -3px 0 inset;
   box-sizing: border-box;
-  color:rgb(38,38,171);
+  color: rgb(38, 38, 171);
   cursor: pointer;
   display: inline-flex;
-  font-family: "JetBrains Mono",monospace;
+  font-family: "JetBrains Mono", monospace;
   height: 35px;
   justify-content: center;
   line-height: 1;
@@ -106,81 +103,78 @@ p {
   position: relative;
   text-align: left;
   text-decoration: none;
-  transition: box-shadow .15s,transform .15s;
+  transition: box-shadow 0.15s, transform 0.15s;
   user-select: none;
   -webkit-user-select: none;
   touch-action: manipulation;
   white-space: nowrap;
-  will-change: box-shadow,transform;
+  will-change: box-shadow, transform;
   font-size: 18px;
 }
 
 .loginbtn:focus {
-  box-shadow: #D6D6E7 0 0 0 1.5px inset, rgba(45, 35, 66, 0.4) 0 2px 4px, rgba(45, 35, 66, 0.3) 0 7px 13px -3px, #D6D6E7 0 -3px 0 inset;
+  box-shadow: #d6d6e7 0 0 0 1.5px inset, rgba(45, 35, 66, 0.4) 0 2px 4px,
+    rgba(45, 35, 66, 0.3) 0 7px 13px -3px, #d6d6e7 0 -3px 0 inset;
 }
 
 .loginbtn:hover {
-  box-shadow: rgba(45, 35, 66, 0.4) 0 4px 8px, rgba(45, 35, 66, 0.3) 0 7px 13px -3px, #D6D6E7 0 -3px 0 inset;
+  box-shadow: rgba(45, 35, 66, 0.4) 0 4px 8px,
+    rgba(45, 35, 66, 0.3) 0 7px 13px -3px, #d6d6e7 0 -3px 0 inset;
   transform: translateY(-2px);
 }
 
 .loginbtn:active {
-  box-shadow: #D6D6E7 0 3px 7px inset;
+  box-shadow: #d6d6e7 0 3px 7px inset;
   transform: translateY(2px);
 }
 
-.abc{
+.abc {
   color: white;
-  text-decoration:underline;
+  text-decoration: underline;
 }
 
-.login label{
+.login label {
   color: white;
 }
 
-.login{
+.login {
   background-color: rgb(7, 7, 7);
   min-height: 100vh;
 }
 
-.reg-img{
+.reg-img {
   object-fit: cover;
   width: 100%;
 }
 
-
-.bikeimg2{
+.bikeimg2 {
   object-fit: cover;
-  height:494px;
+  height: 494px;
   border-radius: 10px;
-  width: 632px; 
+  width: 632px;
 }
 
-
-
-
 .fancy {
-  --b: 6px;   /* control the border thickness */
-  --w: 80px;  /* control the width of the line*/
-  --g: 15px;  /* control the gap */
-  --c: #0B486B;
- 
+  --b: 6px; /* control the border thickness */
+  --w: 80px; /* control the width of the line*/
+  --g: 15px; /* control the gap */
+  --c: #0b486b;
+
   width: fit-content;
   padding: 0 1em;
   line-height: 1 rem;
   border: 1px solid;
   color: #fff;
-  background: 
-    conic-gradient(from   45deg at left ,var(--c) 25%,#0000 0) 0,
-    conic-gradient(from -135deg at right,var(--c) 25%,#0000 0) 100%;
+  background: conic-gradient(from 45deg at left, var(--c) 25%, #0000 0) 0,
+    conic-gradient(from -135deg at right, var(--c) 25%, #0000 0) 100%;
   background-size: 51% 100%;
   background-origin: border-box;
   background-repeat: no-repeat;
-  border-image: 
-     linear-gradient(
-       #0000      calc(50% - var(--b)/2),
-       var(--c) 0 calc(50% + var(--b)/2),
-       #0000    0) 
-    1/0 var(--w)/calc(var(--w) + var(--g));
+  border-image: linear-gradient(
+      #0000 calc(50% - var(--b) / 2),
+      var(--c) 0 calc(50% + var(--b) / 2),
+      #0000 0
+    )
+    1/0 var(--w) / calc(var(--w) + var(--g));
   margin-inline: auto;
 }

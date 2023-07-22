@@ -52,7 +52,10 @@ function DefaultLayout(props) {
         <Row gutter={16} justify="center">
           <Col lg={20} sm={24} xs={24}>
             <div className="d-flex justify-content-between">
-              <h1 className="heading">BikeVenture</h1>
+              <a href="/" style={{ textDecoration: "none" }}>
+                <h1 className="heading">BikeVenture</h1>
+              </a>
+
               {user ? (
                 <Space direction="vertical">
                   <Space wrap>
