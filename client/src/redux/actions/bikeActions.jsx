@@ -6,7 +6,7 @@ const api = axios.create({
 });
 
 
-// server side
+
 
 export const getAllBikes = () => async (dispatch) => {
   dispatch({ type: "loading", payload: true });
