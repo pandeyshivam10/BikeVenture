@@ -49,22 +49,13 @@ function Register() {
   return (
     <DefaultLayout>
       <div className="login">
-        <Row gutter={16} className="d-flex align-items-center">
-          <Col lg={16} style={{ position: "relative" }}>
-            <img
-              src="https://wallpaperaccess.com/full/1433024.jpg"
-              alt="loading"
-              className="reg-img"
-            ></img>
-          </Col>
-          <Col lg={8} className="text-left">
             <Form
               form={form} // Pass the form instance to the Form component
               onFinish={handleSubmit}
               className="login-form"
               layout="vertical"
             >
-              <h2 className="abc"> REGISTER FORM </h2>
+              <h2 className="abc"> SignUp</h2>
               <hr />
               <Form.Item
                 name="username"
@@ -105,15 +96,14 @@ function Register() {
                 <Button
                   type="primary"
                   htmlType="submit"
-                  className="login-form-button"
+                  className="login-form-button" style={{background:"black"}}
                 >
                   Register
                 </Button>
-                <label>Or</label> <a href="/login">Login now!</a>
+                <label>Or</label> <a style={{color:"yellow"}} href="/login">Login now!</a>
               </Form.Item>
             </Form>
-          </Col>
-        </Row>
+        
       </div>
     </DefaultLayout>
   );

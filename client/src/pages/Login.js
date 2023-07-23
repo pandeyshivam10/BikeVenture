@@ -23,21 +23,14 @@ function Login() {
     <DefaultLayout>
       <div>
         <div className="login">
-          <Row gutter={16} className="d-flex align-items-center">
-            <Col lg={16} style={{ position: "relative" }}>
-              <img
-                src="https://wallpaperaccess.com/full/1433024.jpg"
-                alt="loading"
-                className="reg-img"
-              ></img>
-            </Col>
-            <Col lg={8} className="text-left">
+           
+            
               <Form
                 onFinish={handleSubmit}
                 className="login-form"
                 layout="vertical"
               >
-                <h2 className="abc"> LOGIN FORM </h2>
+                <h3 className="abc">Sign In</h3>
                 <hr />
                 <Form.Item
                   name="username"
@@ -68,15 +61,13 @@ function Login() {
                   <Button
                     type="primary"
                     htmlType="submit"
-                    className="login-form-button"
+                    className="login-form-button" style={{background:"black"}}
                   >
                     Log in
                   </Button>
-                  <label>Or</label> <a href="/register">register now!</a>
+                  <label>Or</label> <a style={{color: "yellow"}} href="/register">register now!</a>
                 </Form.Item>
               </Form>
-            </Col>
-          </Row>
         </div>
       </div>
     </DefaultLayout>

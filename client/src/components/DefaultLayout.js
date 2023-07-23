@@ -53,7 +53,7 @@ function DefaultLayout(props) {
           <Col lg={20} sm={24} xs={24}>
             <div className="d-flex justify-content-between">
               <a href="/" style={{ textDecoration: "none" }}>
-                <h1 className="heading">BikeVenture</h1>
+                <h1 className="heading"><span className="span">Bike</span><span style={{color:"white"}}>Venture</span></h1>
               </a>
 
               {user ? (
@@ -64,13 +64,13 @@ function DefaultLayout(props) {
                     </Dropdown>
                   </Space>
                 </Space>
-              ) : (
-                <Space wrap>
-                  <Button className="loginbtn">
-                    <Link to="/login">Log In</Link>
-                  </Button>
-                </Space>
-              )}
+              ) : <p></p>
+                // <Space wrap>
+                //   <Button className="loginbtn">
+                //     <Link to="/login">Log In</Link>
+                //   </Button>
+                // </Space>
+              }
             </div>
           </Col>
         </Row>
