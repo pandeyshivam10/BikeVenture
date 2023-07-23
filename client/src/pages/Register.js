@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import DefaultLayout from "../components/DefaultLayout";
-import { Row, Col, Form, Input, Button } from "antd";
+import { Form, Input, Button } from "antd";
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
 import { userRegister } from "../redux/actions/userActions";
 import { useDispatch } from "react-redux";

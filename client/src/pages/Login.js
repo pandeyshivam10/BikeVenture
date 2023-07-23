@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import DefaultLayout from "../components/DefaultLayout";
 
-import { Row, Col, Form, Input, Button } from "antd";
+import { Form, Input, Button } from "antd";
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
 import { useDispatch } from 'react-redux';
 import { userLogin } from "../redux/actions/userActions";
