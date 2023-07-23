@@ -5,7 +5,7 @@ body {
   font-family: "Nunito Sans", sans-serif !important;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: azure;
+  background-color: black;
 }
 
 code {
@@ -14,9 +14,16 @@ code {
 }
 
 .bs1 {
-  box-shadow: rgba(0, 0, 0, 0.25) 0px 0.0625em 0.0625em,
+  /* background-color: rgb(0, 0, 0); */
+  /* box-shadow: rgba(0, 0, 0, 0.25) 0px 0.0625em 0.0625em,
     rgba(0, 0, 0, 0.25) 0px 0.125em 0.5em,
-    rgba(255, 255, 255, 0.1) 0px 0px 0px 1px inset;
+    rgba(255, 255, 255, 0.1) 0px 0px 0px 1px inset; */
+    background-color: rgba(255, 255, 255, 0.05);
+/* border-radius: 16px; */
+box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+backdrop-filter: blur(8.1px);
+-webkit-backdrop-filter: blur(8.1px);
+/* border: 1px solid rgba(0, 0, 0, 0.3); */
 }
 .bs-1 {
   box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px,
@@ -44,7 +51,19 @@ p {
 .header {
   padding: 10px;
 }
-
+.span{
+  color: lightskyblue;
+}
+.login{
+  background: url("https://source.unsplash.com/1000x800/?bikes") no-repeat;
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.heading{
+  display: flex;
+}
 .content {
   min-height: 90vh;
 }
@@ -73,10 +92,16 @@ p {
 
 .login-form {
   background-color: rgb(23, 22, 21);
-  margin-right: 50px;
-  padding: 23px;
-  margin-top: 50px;
-  border-radius: 5px;
+  padding: 20px;
+  height: 50vh;
+  /* From https://css.glass */
+background: rgba(0, 0, 0, 0.05);
+border-radius: 16px;
+box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+backdrop-filter: blur(8.1px);
+-webkit-backdrop-filter: blur(8.1px);
+border: 1px solid rgba(0, 0, 0, 0.3);
+
 }
 
 .loginbtn {
@@ -129,12 +154,13 @@ p {
 }
 
 .abc {
-  color: white;
-  text-decoration: underline;
+  color: rgb(255, 102, 0);
+  font-weight: 1000;
+  text-decoration: none;
 }
 
 .login label {
-  color: white;
+  color: rgb(255, 255, 255);
 }
 
 .login {
