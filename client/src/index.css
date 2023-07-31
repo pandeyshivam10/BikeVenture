@@ -92,8 +92,8 @@ p {
 .login-form {
   background-color: rgb(23, 22, 21);
   padding: 20px;
-  height: 50vh;
-  /* From https://css.glass */
+  height: 40vh;
+ 
 background: rgba(0, 0, 0, 0.05);
 border-radius: 16px;
 box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
