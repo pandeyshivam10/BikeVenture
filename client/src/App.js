@@ -4,6 +4,7 @@ import Register from "./pages/Register";
 import BookingBike from "./pages/BookingBike";
 import Login from "./pages/Login";
 import Home from "./pages/Home";
+import { MyBooking } from "./pages/MyBooking";
 
 function App() {
   return (
@@ -19,11 +20,12 @@ function App() {
         />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/bookings" element={<MyBooking />} />
         <Route
           path="/booking/:bikeid"
           element={
             <ProtectedRoute>
-              <BookingBike/>
+              <BookingBike />
             </ProtectedRoute>
           }
         />

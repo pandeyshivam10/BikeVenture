@@ -21,3 +21,19 @@ export const bookingBike = (reqObj) => async (dispatch) => {
     message.error("Something went Wrong...");
   }
 };
+
+
+export const getAllBookings = () => async (dispatch) => {
+  dispatch({ type: "loading", payload: true });
+
+  try {
+    const response  = await api.get("/api/bookings/getallbookings");
+    dispatch({ type: "GET_ALL_BOOKINGS", payload: response.data });
+    dispatch({ type: "loading", payload: false });
+  } catch (error) {
+    console.log(error);
+    dispatch({ type: "loading", payload: false });
+    message.error("Something went Wrong...");
+  }
+
+};

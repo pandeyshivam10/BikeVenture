@@ -5,9 +5,6 @@ const api = axios.create({
   // baseURL: "http://localhost:5000",
 });
 
-
-
-
 export const getAllBikes = () => async (dispatch) => {
   dispatch({ type: "loading", payload: true });
 

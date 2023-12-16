@@ -49,4 +49,16 @@ router.post("/bookbike", async (req, res) => {
   }
 });
 
+
+router.get("/getallbookings", async (req, res) => {
+  try {
+    const bookings = await bookingModel.find();
+    res.send(bookings);
+
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ error: "Something went wrong" });
+  }
+});
+
 module.exports = router;
