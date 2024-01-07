@@ -1,20 +1,23 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import DefaultLayout from "../components/DefaultLayout";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllBikes } from "../redux/actions/bikeActions";
-// import moment from "moment";
+import moment from "moment";
 
-import { Button, Row, Col } from "antd";
+import { Button, Row, Col, DatePicker } from "antd";
 
 import Loader from "../components/Loader";
 import { Link } from "react-router-dom";
-// const { RangePicker } = DatePicker;
+// import { configureStore } from "@reduxjs/toolkit";
+const { RangePicker } = DatePicker;
 
 function Home() {
   const { bikes } = useSelector((state) => state.custom);
   const { loading } = useSelector((state) => state.custom1);
 
-  // const [totalBikes, setTotalBikes] = useState([]);
+  const [totalBikes, setTotalBikes] = useState([]);
+
+  // const [flag, setFlag] = useState(0);
 
   const dispatch = useDispatch();
 
@@ -22,38 +25,35 @@ function Home() {
     dispatch(getAllBikes());
   }, [dispatch]);
 
-  // useEffect(() => {
-  //   setTotalBikes(bikes);
-  // }, [bikes]);
+  console.log(bikes);
 
-  // const setFilter = (e) => {
-  //   var fromTime = moment(e[0],'MMM DD YYYY HH:mm');
-  //   var toTime = moment(e[1],'MMM DD YYYY HH:mm');
+  useEffect(() => {
+    setTotalBikes(bikes);
+  }, [bikes]);
 
-  //   var filteredBikes = [];
+  // const filterDate = (e) => {
+  //   const fromDate = e[0];
+  //   const toDate = e[1];
 
-  //   for (var bike of bikes) {
-  //     if (bike.bookedTimeSlots === 0) {
-  //       filteredBikes.push(bike);
-  //     } else {
-  //       for (var booking of bike.bookedTimeSlots) {
-        
+  //   const fromTime = fromDate.format("MMM DD YYYY HH:mm");
+  //   const toTime = toDate.format("MMM DD YYYY HH:mm");
 
-  //         if (
-  //           fromTime.isBetween(booking.from, booking.to) ||
-  //           toTime.isBetween(booking.from, booking.to) ||
-  //           moment(booking.from).isBetween(fromTime, toTime) ||
-  //           moment(booking.to).isBetween(fromTime, toTime)
-  //         ) {
-  //         } else {
-  //           filteredBikes.push(bike);
-  //         }
-  //       }
-  //     }
-  //   }
+  //   console.log(fromTime);
+  //   console.log(toTime);
 
-    
-  //   setTotalBikes(filteredBikes);
+  //   bikes.filter((e) => {
+  //     const time = e.bookedTimeSlots;
+  //     // console.log(e.bookedTimeSlots);
+
+  //     time.map((e) => {
+  //       const a = e.from;
+  //       const b = e.to;
+  //       console.log(a);
+  //       console.log(b);
+
+  //         return fromDate>
+  //     });
+  //   });
   // };
 
   return (
@@ -61,9 +61,12 @@ function Home() {
       {/* <Row className="mt-4" justify="center">
         <Col lg={20} sm={24} className="d-flex justify-content-left">
           <RangePicker
-            // onChange={setFilter}
+            disabledDate={(current) => {
+              return current && current < moment().startOf("day");
+            }}
             showTime={{ format: "HH:mm" }}
             format="MMM DD YYYY HH:mm"
+            onChange={filterDate}
           />
         </Col>
       </Row> */}
@@ -84,7 +87,7 @@ function Home() {
                     </div>
                     <div>
                       <Button type="primary" className="btn1">
-                        <Link to={`/booking/${bike._id}`}>Book Now !</Link>
+                        <Link to={`/booking/${bike._id}`}>Book Now</Link>
                       </Button>
                     </div>
                   </div>

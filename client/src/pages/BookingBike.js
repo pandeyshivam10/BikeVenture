@@ -7,6 +7,7 @@ import DefaultLayout from "../components/DefaultLayout";
 import Loader from "../components/Loader";
 import StripeCheckout from "react-stripe-checkout";
 import { bookingBike } from "../redux/actions/bookingAction";
+import moment from 'moment';
 
 const { RangePicker } = DatePicker;
 
@@ -50,6 +51,9 @@ function BookingBike() {
 
       const fromTime = fromDate.format("MMM DD YYYY HH:mm");
       const toTime = toDate.format("MMM DD YYYY HH:mm");
+
+      console.log(fromTime);
+      console.log(toTime);
 
       setFrom(fromTime);
       setTo(toTime);
@@ -126,10 +130,14 @@ function BookingBike() {
               <h1 className="fancy">Selected Time Slot</h1>
               <br />
               <RangePicker
+                disabledDate={(current) => {
+                  return current && current < moment().startOf("day");
+                }}
                 showTime={{ format: "HH:mm" }}
                 format="MMM DD YYYY HH:mm"
                 onChange={selectTimeSlot}
               />
+
               <div>
                 <p>
                   Total Hours : <b> {hour} </b> Hours{" "}
