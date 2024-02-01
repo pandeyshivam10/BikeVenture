@@ -69,6 +69,10 @@ function Login() {
                 register now!
               </a>
             </Form.Item>
+          <div className="test">
+            <h5>Test Username : - user1234</h5>
+            <h5>Test Password : - 12345678</h5>
+          </div>
           </Form>
         </div>
       </div>

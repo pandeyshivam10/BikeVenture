@@ -13,6 +13,7 @@ export const bookingBike = (reqObj) => async (dispatch) => {
   try {
     await api.post("/api/bookings/bookbike",reqObj);
     message.success("Your Bike Booked Succesfully");
+    window.location.href = '/bookings';
 
     dispatch({ type: "loading", payload: false });
   } catch (error) {

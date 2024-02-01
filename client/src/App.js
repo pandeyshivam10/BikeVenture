@@ -20,7 +20,14 @@ function App() {
         />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
-        <Route path="/bookings" element={<MyBooking />} />
+        <Route
+          path="/bookings"
+          element={
+            <ProtectedRoute>
+              <MyBooking />
+            </ProtectedRoute>
+          }
+        />
         <Route
           path="/booking/:bikeid"
           element={

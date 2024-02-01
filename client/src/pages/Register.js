@@ -8,7 +8,7 @@ import { useDispatch } from "react-redux";
 function Register() {
   const dispatch = useDispatch();
 
-  // Use the Ant Design useForm hook to get access to the form instance
+  
   const [form] = Form.useForm();
 
   const handleSubmit = (values) => {
