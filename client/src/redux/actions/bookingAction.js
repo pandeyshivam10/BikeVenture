@@ -2,7 +2,7 @@ import { message } from "antd";
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: "https://clear-rose-newt.cyclic.app/",
+  baseURL: "https://scary-earmuffs-foal.cyclic.app/",
   // baseURL: "http://localhost:5000",
 });
 

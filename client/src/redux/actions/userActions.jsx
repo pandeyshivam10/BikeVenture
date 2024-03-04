@@ -2,7 +2,7 @@ import axios from "axios";
 import { message } from "antd";
 
 const api = axios.create({
-  baseURL: "https://clear-rose-newt.cyclic.app",
+  baseURL: "https://scary-earmuffs-foal.cyclic.app/",
   // baseURL: "http://localhost:5000",
 });
 
@@ -15,7 +15,7 @@ export const userLogin = (reqObj) => async (dispatch) => {
     message.success("Login Success");
     setTimeout(() => {
       window.location.href = "/";
-      
+
     }, 500);
 
     dispatch({ type: "loading", payload: false });
