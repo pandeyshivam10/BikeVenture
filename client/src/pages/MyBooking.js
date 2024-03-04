@@ -15,7 +15,9 @@ export function MyBooking() {
   const { loading } = useSelector((state) => state.custom1);
   const x = localStorage.getItem("user");
   const userObject = JSON.parse(x);
-  const userId = userObject._id;
+  const userId = userObject.data.user._id;
+
+  console.log(userId);
 
   const filteredData = bookings.filter((booking) => booking.user === userId);
 

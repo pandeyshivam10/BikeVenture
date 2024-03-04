@@ -22,6 +22,11 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: [true, "Please confirm your password"],
   },
+  role: {
+    type: String,
+    enum: ["user", "admin"],
+    default: "user",
+  },
 });
 
 userSchema.pre("save", async function (next) {

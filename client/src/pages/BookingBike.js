@@ -89,10 +89,13 @@ function BookingBike() {
 
   // const stripePublishableKey =
   //   "pk_test_51NVqR0SIqS8BsIk6en8v7YHELAeHu4ATaFxchE1T6QR5mfpjakM8CMy9ZaQDfBMQqsuXsIh2F3rIJFAcpR21rYTk00Z80cRUs7"; // Replace with your actual Stripe publishable key
+  const x = localStorage.getItem("user");
+  const userObject = JSON.parse(x);
+  const userId = userObject.data.user._id;
 
   const onToken = () => {
     const reqObj = {
-      user: JSON.parse(localStorage.getItem("user"))._id,
+      user: userId,
       bike: bike._id,
       hour,
       totalAmount,
