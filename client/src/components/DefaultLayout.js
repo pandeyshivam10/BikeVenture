@@ -11,6 +11,7 @@ function DefaultLayout(props) {
   };
 
   const user = JSON.parse(localStorage.getItem("user"));
+
   const items = [
     {
       key: "1",
@@ -60,7 +61,7 @@ function DefaultLayout(props) {
                 <Space direction="vertical">
                   <Space wrap>
                     <Dropdown menu={{ items }} placement="bottomRight">
-                      <Button className="loginbtn">{user.username}</Button>
+                      <Button className="loginbtn">{user.data.user.username}</Button>
                     </Dropdown>
                   </Space>
                 </Space>

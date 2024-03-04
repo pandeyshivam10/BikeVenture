@@ -4,9 +4,10 @@ import Register from "./pages/Register";
 import BookingBike from "./pages/BookingBike";
 import Login from "./pages/Login";
 import Home from "./pages/Home";
-import { MyBooking } from "./pages/MyBooking";
+import MyBooking from "./pages/MyBooking";
 
 function App() {
+  const isAuthenticated = Boolean(localStorage.getItem("user"));
   return (
     <div className="App">
       <Routes>
@@ -18,8 +19,14 @@ function App() {
             </ProtectedRoute>
           }
         />
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
+        <Route
+          path="/login"
+          element={isAuthenticated ? <Navigate to="/" /> : <Login />}
+        />
+        <Route
+          path="/register"
+          element={isAuthenticated ? <Navigate to="/" /> : <Register />}
+        />
         <Route
           path="/bookings"
           element={

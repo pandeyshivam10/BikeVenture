@@ -1,10 +1,10 @@
 const express = require("express");
 
 const router = express.Router();
-
+const auth = require("../middleware/auth");
 const Bike = require("../models/bikeModel")
 
-router.get("/getallbikes",async(req,res)=>{
+router.get("/getallbikes",auth,async(req,res)=>{
     try {
 
         const bikes = await Bike.find()

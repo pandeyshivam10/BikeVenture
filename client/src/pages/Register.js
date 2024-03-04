@@ -1,14 +1,18 @@
 import React, { useEffect, useState } from "react";
 import DefaultLayout from "../components/DefaultLayout";
 import { Form, Input, Button } from "antd";
-import { UserOutlined, LockOutlined } from "@ant-design/icons";
+import {
+  UserOutlined,
+  UserAddOutlined,
+  LockOutlined,
+  MailOutlined,
+} from "@ant-design/icons";
 import { userRegister } from "../redux/actions/userActions";
 import { useDispatch } from "react-redux";
 
 function Register() {
   const dispatch = useDispatch();
 
-  
   const [form] = Form.useForm();
 
   const handleSubmit = (values) => {
@@ -49,61 +53,77 @@ function Register() {
   return (
     <DefaultLayout>
       <div className="login">
-            <Form
-              form={form} // Pass the form instance to the Form component
-              onFinish={handleSubmit}
-              className="login-form"
-              layout="vertical"
-            >
-              <h2 className="abc"> SignUp</h2>
-              <hr />
-              <Form.Item
-                name="username"
-                rules={[
-                  { required: true, message: "Please input your username!" },
-                ]}
-              >
-                <Input prefix={<UserOutlined />} placeholder="Username" />
-              </Form.Item>
-              <Form.Item
-                name="password"
-                rules={[
-                  { required: true, message: "Please input your password!" },
-                  { validator: validatePassword },
-                ]}
-              >
-                <Input.Password
-                  prefix={<LockOutlined />}
-                  placeholder="Password"
-                />
-              </Form.Item>
-              <Form.Item
-                name="cpassword"
-                rules={[
-                  { required: true, message: "Please input your password!" },
-                  { validator: validateConfirmPassword },
-                ]}
-                validateStatus={passwordMatch ? "success" : "error"}
-                help={!passwordMatch && "Passwords do not match."}
-              >
-                <Input.Password
-                  prefix={<LockOutlined />}
-                  placeholder="Confirm Password"
-                />
-              </Form.Item>
+        <Form
+          form={form} // Pass the form instance to the Form component
+          onFinish={handleSubmit}
+          className="login-form"
+          layout="vertical"
+        >
+          <h2 className="abc"> SignUp</h2>
+          <hr />
 
-              <Form.Item>
-                <Button
-                  type="primary"
-                  htmlType="submit"
-                  className="login-form-button" style={{background:"black"}}
-                >
-                  Register
-                </Button>
-                <label>Or</label> <a style={{color:"yellow"}} href="/login">Login now!</a>
-              </Form.Item>
-            </Form>
-        
+          <Form.Item
+            name="name"
+            rules={[{ required: true, message: "Please enter your name" }]}
+          >
+            <Input prefix={<UserOutlined />} placeholder="Name" />
+          </Form.Item>
+
+          <Form.Item
+            name="email"
+            rules={[
+              { required: true, message: "Please Provide your email" },
+              { type: "email", message: "Please enter a valid email address" },
+            ]}
+          >
+            <Input prefix={<MailOutlined />} placeholder="Email" />
+          </Form.Item>
+
+          <Form.Item
+            name="username"
+            rules={[{ required: true, message: "Please input your username!" }]}
+          >
+            <Input prefix={<UserAddOutlined />} placeholder="Username" />
+          </Form.Item>
+          <Form.Item
+            name="password"
+            rules={[
+              { required: true, message: "Please input your password!" },
+              { validator: validatePassword },
+            ]}
+          >
+            <Input.Password prefix={<LockOutlined />} placeholder="Password" />
+          </Form.Item>
+          <Form.Item
+            name="cpassword"
+            rules={[
+              { required: true, message: "Please input your password!" },
+              { validator: validateConfirmPassword },
+            ]}
+            validateStatus={passwordMatch ? "success" : "error"}
+            help={!passwordMatch && "Passwords do not match."}
+          >
+            <Input.Password
+              prefix={<LockOutlined />}
+              placeholder="Confirm Password"
+            />
+          </Form.Item>
+
+          <Form.Item>
+            <Button
+              type="primary"
+              htmlType="submit"
+              className="login-form-button"
+              style={{ background: "black" }}
+            >
+              Register
+            </Button>
+            <label>Or</label>{" "}
+            <a style={{ color: "yellow" }} href="/login">
+              Login now!
+            </a>
+          </Form.Item>
+        </Form>
       </div>
     </DefaultLayout>
   );

@@ -1,9 +1,11 @@
 import axios from "axios";
 import { message } from "antd";
+
 const api = axios.create({
   baseURL: "https://clear-rose-newt.cyclic.app",
   // baseURL: "http://localhost:5000",
 });
+
 export const userLogin = (reqObj) => async (dispatch) => {
   dispatch({ type: "loading", payload: true });
 
@@ -26,12 +28,21 @@ export const userRegister = (reqObj) => async (dispatch) => {
   dispatch({ type: "loading", payload: true });
 
   try {
+    const checkEmailResponse = await api.post("/api/users/checkEmail", {
+      email: reqObj.email,
+    });
+
+    if (checkEmailResponse.data.exists) {
+      message.error("Email is already taken");
+      dispatch({ type: "loading", payload: false });
+      return;
+    }
+
     const checkUsernameResponse = await api.post("/api/users/checkUsername", {
       username: reqObj.username,
     });
 
     if (checkUsernameResponse.data.exists) {
-      // If the username exists, reject the registration and display an error message
       message.error("Username is already taken");
       dispatch({ type: "loading", payload: false });
       return;

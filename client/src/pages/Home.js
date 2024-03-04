@@ -25,51 +25,17 @@ function Home() {
     dispatch(getAllBikes());
   }, [dispatch]);
 
-  console.log(bikes);
+  // console.log(bikes);
 
   useEffect(() => {
     setTotalBikes(bikes);
   }, [bikes]);
 
-  // const filterDate = (e) => {
-  //   const fromDate = e[0];
-  //   const toDate = e[1];
-
-  //   const fromTime = fromDate.format("MMM DD YYYY HH:mm");
-  //   const toTime = toDate.format("MMM DD YYYY HH:mm");
-
-  //   console.log(fromTime);
-  //   console.log(toTime);
-
-  //   bikes.filter((e) => {
-  //     const time = e.bookedTimeSlots;
-  //     // console.log(e.bookedTimeSlots);
-
-  //     time.map((e) => {
-  //       const a = e.from;
-  //       const b = e.to;
-  //       console.log(a);
-  //       console.log(b);
-
-  //         return fromDate>
-  //     });
-  //   });
-  // };
+  
 
   return (
     <DefaultLayout>
-      {/* <Row className="mt-4" justify="center">
-        <Col lg={20} sm={24} className="d-flex justify-content-left">
-          <RangePicker
-            disabledDate={(current) => {
-              return current && current < moment().startOf("day");
-            }}
-            showTime={{ format: "HH:mm" }}
-            format="MMM DD YYYY HH:mm"
-            onChange={filterDate}
-          />
-        </Col>
-      </Row> */}
+   
 
       {loading && <Loader />}
 

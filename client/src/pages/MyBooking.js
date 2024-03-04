@@ -6,12 +6,13 @@ import { getAllBookings } from "../redux/actions/bookingAction";
 import { getAllBikes } from "./../redux/actions/bikeActions";
 import { Col, Row } from "antd";
 import moment from "moment";
+import Loader from "../components/Loader";
 
 export function MyBooking() {
   const dispatch = useDispatch();
   const { bookings } = useSelector((state) => state.custom2);
   const { bikes } = useSelector((state) => state.custom);
-
+  const { loading } = useSelector((state) => state.custom1);
   const x = localStorage.getItem("user");
   const userObject = JSON.parse(x);
   const userId = userObject._id;
@@ -35,6 +36,7 @@ export function MyBooking() {
 
   return (
     <DefaultLayout>
+      {loading && <Loader />}
       <h1 className="text-center mt-2 ">My Bookings</h1>
 
       <Row justify="center">
@@ -51,7 +53,8 @@ export function MyBooking() {
                   </h2>
                   <p className="card-text">Total Hours: {booking.hour}</p>
                   <p className="card-text">
-                    Rent per Hour: {getBike(booking.bike).rentPerHour}
+                    Rent per Hour:{" "}
+                    {bikes.find((b) => b._id === booking.bike)?.rentPerHour}
                   </p>
                   <p className="card-text">
                     Total Amount: {booking.totalAmount}
@@ -64,7 +67,7 @@ export function MyBooking() {
                   </p>
                   <p className="card-text">To: {booking.bookedTimeSlots.to}</p>
                   <p className="card-text">
-                    Transaction ID: {booking.transactionId}
+                    Transaction ID: None
                   </p>
                   <p className="card-text">
                     Date of Booking:{" "}
@@ -87,3 +90,5 @@ export function MyBooking() {
     </DefaultLayout>
   );
 }
+
+export default MyBooking;

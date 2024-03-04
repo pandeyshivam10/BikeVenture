@@ -1,36 +1,47 @@
 const express = require("express");
+const jwt = require("jsonwebtoken");
+
+const auth = require("../middleware/auth");
 
 const router = express.Router();
 
 const User = require("../models/userModel");
 
-router.post("/login", async (req, res) => {
+
+
+router.post("/login",async (req, res) => {
   const { username, password } = req.body;
 
   try {
-    const user = await User.findOne({ username, password });
+    const user = await User.findOne({ username }).select("+password");
 
-    if (user) {
-      res.send(user);
-    } else {
-      return res.status(400).json({ error });
+    if (!user || !(await user.correctPassword(password, user.password))) {
+      return res.status(409).json({ error: "Invalid username or password." });
     }
+
+    // If user exists and password is correct, generate JWT token
+    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
+      expiresIn: process.env.JWT_EXPIRES_IN,
+    });
+
+    res.status(200).json({
+      token,
+      data: {
+        user: user, // Return user data along with the token if needed
+      },
+    });
   } catch (error) {
-    return res.status(400).json({ error });
+    // Handle any errors that occur during login
+    console.error("Login error:", error);
+    return res.status(500).json({ error: "Internal server error" });
   }
 });
 
 router.post("/register", async (req, res) => {
-  const { username, password } = req.body;
+  const { name, email, username, password, cpassword } = req.body;
 
   try {
-    const existingUser = await User.findOne({ username });
-
-    if (existingUser) {
-      return res.status(409).json({ error: "Username is already taken." });
-    }
-
-    const newUser = new User({ username, password });
+    const newUser = new User({ name, email, username, password, cpassword });
 
     await newUser.save();
 
@@ -46,6 +57,23 @@ router.post("/checkUsername", async (req, res) => {
 
   try {
     const existingUser = await User.findOne({ username });
+
+    if (existingUser) {
+      return res.json({ exists: true });
+    }
+
+    return res.json({ exists: false });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ error: "Something went wrong." });
+  }
+});
+
+router.post("/checkEmail" , async (req, res) => {
+  const { email } = req.body;
+
+  try {
+    const existingUser = await User.findOne({ email });
 
     if (existingUser) {
       return res.json({ exists: true });
