@@ -17,7 +17,7 @@ export function MyBooking() {
   const userObject = JSON.parse(x);
   const userId = userObject.data.user._id;
 
-  console.log(userId);
+  // console.log(userId);
 
   const filteredData = bookings.filter((booking) => booking.user === userId);
 
