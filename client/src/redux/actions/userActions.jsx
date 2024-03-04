@@ -15,6 +15,7 @@ export const userLogin = (reqObj) => async (dispatch) => {
     message.success("Login Success");
     setTimeout(() => {
       window.location.href = "/";
+      
     }, 500);
 
     dispatch({ type: "loading", payload: false });
