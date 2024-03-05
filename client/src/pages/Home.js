@@ -1,23 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import DefaultLayout from "../components/DefaultLayout";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllBikes } from "../redux/actions/bikeActions";
-import moment from "moment";
-
-import { Button, Row, Col, DatePicker } from "antd";
-
+import { Button } from "antd";
 import Loader from "../components/Loader";
 import { Link } from "react-router-dom";
-// import { configureStore } from "@reduxjs/toolkit";
-const { RangePicker } = DatePicker;
 
 function Home() {
   const { bikes } = useSelector((state) => state.custom);
   const { loading } = useSelector((state) => state.custom1);
-
-  const [totalBikes, setTotalBikes] = useState([]);
-
-  // const [flag, setFlag] = useState(0);
 
   const dispatch = useDispatch();
 
@@ -25,43 +16,30 @@ function Home() {
     dispatch(getAllBikes());
   }, [dispatch]);
 
-  // console.log(bikes);
-
-  useEffect(() => {
-    setTotalBikes(bikes);
-  }, [bikes]);
-
-  
-
   return (
     <DefaultLayout>
-   
-
       {loading && <Loader />}
 
-      <div>
-        <Row justify="center" gutter={20} className="mt-5">
-          {bikes.map((bike) => {
-            return (
-              <Col lg={5} sm={24} xs={24} key={bike.name}>
-                <div className="bike bs-1 p-3 mt-5">
-                  <img src={bike.image} className="bikeimg" alt="load" />
-                  <div className="bike-content d-flex align-items-center justify-content-between">
-                    <div>
-                      <p>{bike.name}</p>
-                      <p>₹{bike.rentPerHour} Rent/Hour</p>
-                    </div>
-                    <div>
-                      <Button type="primary" className="btn1">
-                        <Link to={`/booking/${bike._id}`}>Book Now</Link>
-                      </Button>
-                    </div>
-                  </div>
-                </div>
-              </Col>
-            );
-          })}
-        </Row>
+      <div className="container mx-auto mt-5">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+          {bikes.map((bike) => (
+            <div
+              key={bike.name}
+              className="bg-white shadow-lg rounded-md overflow-hidden transition duration-300 ease-in-out transform hover:scale-105"
+            >
+              <img src={bike.image} className="w-full h-48 object-cover" alt="bike" />
+              <div className="p-4">
+                <h2 className="text-lg font-semibold mb-2">{bike.name}</h2>
+                <p className="text-gray-600 mb-2">₹{bike.rentPerHour} Rent/Hour</p>
+                <Button type="primary" className="w-full">
+                  <Link to={`/booking/${bike._id}`} className="text-white">
+                    Book Now
+                  </Link>
+                </Button>
+              </div>
+            </div>
+          ))}
+        </div>
       </div>
     </DefaultLayout>
   );

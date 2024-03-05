@@ -109,71 +109,71 @@ function BookingBike() {
   return (
     <DefaultLayout>
       {loading && <Loader />}
-
-      <div>
-        <Row
-          justify="center"
-          className="d-flex align-items-center"
-          style={{ minHeight: "90vh" }}
-        >
-          <Col lg={10} sm={24} xs={24}>
+  
+      <div className="container mx-auto px-4 py-8">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+          <div className="flex justify-center">
             {bike && (
               <img
                 src={bike.image}
-                className="bikeimg2 bs-1"
-                alt="loading..."
+                className="w-full h-auto rounded-lg border border-gray-300"
+                alt="Bike"
               />
             )}
-          </Col>
-          <Col lg={10} sm={24} xs={24}>
-            {bikeInfo}
-            <div className="text-right">
-              <h1 className="fancy">Selected Time Slot</h1>
-              <br />
+          </div>
+          <div className="mt-5">
+            {bike && (
+              <div className="text-right">
+                <h1 className=" fancy text-3xl font-semibold mb-4">{bike.name}</h1>
+                <p className="text-lg mb-2">Rent Per Hour: ₹{bike.rentPerHour}</p>
+                <p className="text-lg mb-2">Fuel Type: {bike.fuelType}</p>
+                <p className="text-lg mb-2">Max Persons: {bike.capacity}</p>
+              </div>
+            )}
+  
+            <div className=" text-right mt-8">
+              <h1 className=" fancy text-2xl font-semibold mb-4">Selected Time Slot</h1>
               <RangePicker
-                disabledDate={(current) => {
-                  return current && current < moment().startOf("day");
-                }}
+                disabledDate={(current) => current && current < moment().startOf("day")}
                 showTime={{ format: "HH:mm" }}
                 format="MMM DD YYYY HH:mm"
                 onChange={selectTimeSlot}
+                okButtonProps={{ className: "text-black" }}
               />
-
-              <div>
-                <p>
-                  Total Hours : <b> {hour} </b> Hours{" "}
-                </p>
-                {bike && (
-                  <p>
-                    Rent Per Hour : <b> ₹{bike.rentPerHour} </b> /Hour
-                  </p>
-                )}
-
-                {isDatePickerSelected && (
-                  <div>
-                    <Checkbox
-                      onChange={(e) => {
-                        setDriver(e.target.checked);
-                      }}
-                    >
-                      Driver Required
-                    </Checkbox>
-                    <h2>
-                      Total Amount : <b>₹{totalAmount}/</b>
-                    </h2>
-
-                    <button onClick={() => onToken()} className="loginbtn">
-                      Book Now
-                    </button>
-                  </div>
-                )}
-              </div>
+  
+              {isDatePickerSelected && (
+                <div className="mt-4">
+                  <p className="text-lg mb-2">Total Hours: <b>{hour}</b> Hours</p>
+                  {bike && (
+                    <p className="text-lg mb-2">Rent Per Hour: <b>₹{bike.rentPerHour}</b></p>
+                  )}
+  
+                  <Checkbox
+                    className="text-lg mb-4"
+                    onChange={(e) => {
+                      setDriver(e.target.checked);
+                    }}
+                  >
+                    Driver Required
+                  </Checkbox>
+  
+                  <h2 className="text-xl mb-2">Total Amount: <b>₹{totalAmount}</b></h2>
+  
+                  <button
+                    onClick={() => onToken()}
+                    className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                  >
+                    Book Now
+                  </button>
+                </div>
+              )}
             </div>
-          </Col>
-        </Row>
+          </div>
+        </div>
       </div>
     </DefaultLayout>
   );
+  
 }
 
 export default BookingBike;

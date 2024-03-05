@@ -17,9 +17,9 @@ export function MyBooking() {
   const userObject = JSON.parse(x);
   const userId = userObject.data.user._id;
 
-  // console.log(userId);
-
   const filteredData = bookings.filter((booking) => booking.user === userId);
+  console.log(filteredData);
+  console.log("ff",bookings);
 
   useEffect(() => {
     dispatch(getAllBookings());
@@ -39,54 +39,52 @@ export function MyBooking() {
   return (
     <DefaultLayout>
       {loading && <Loader />}
-      <h1 className="text-center mt-2 ">My Bookings</h1>
+      <h1 className="text-center text-3xl mt-2">My Bookings</h1>
 
-      <Row justify="center">
+      <Row className="justify-center">
         <Col lg={20} sm={24}>
-          <Row gutter={[16, 16]}>
-            {filteredData.map((booking) => (
-              <Row
-                className="m-2 text-left bookingRow flex-align-items-center"
-                key={booking._id}
-              >
+          {filteredData.map((booking) => (
+            <div key={booking._id} className="border p-4 my-4 rounded-lg">
+              <Row className="gap-y-4">
                 <Col lg={7} sm={24}>
-                  <h2>
-                    <b>{getBike(booking.bike)?.name}</b>
+                  <h2 className="font-bold text-lg">
+                    {getBike(booking.bike)?.name}
                   </h2>
-                  <p className="card-text">Total Hours: {booking.hour}</p>
-                  <p className="card-text">
+                  <p className="text-xl">Total Hours: {booking.hour}</p>
+                  <p className="text-xl">
                     Rent per Hour:{" "}
                     {bikes.find((b) => b._id === booking.bike)?.rentPerHour}
                   </p>
-                  <p className="card-text">
-                    Total Amount: {booking.totalAmount}
-                  </p>
+                  <p className="text-xl">Total Amount: ₹{booking.totalAmount}</p>
                 </Col>
 
                 <Col lg={10} sm={24}>
-                  <p className="card-text">
+                  <p className="text-xl">
                     From: {booking.bookedTimeSlots.from}
                   </p>
-                  <p className="card-text">To: {booking.bookedTimeSlots.to}</p>
-                  <p className="card-text">
-                    Transaction ID: None
+                  <p className="text-xl">To: {booking.bookedTimeSlots.to}</p>
+                  <p className="text-xl">
+                    Driver Required:{" "}
+                    {booking.driverRequire === true ? "YES" : "NO"}
                   </p>
-                  <p className="card-text">
+                  <p className="text-xl">
                     Date of Booking:{" "}
                     {moment(booking.createdAt).format("MMM DD YYYY")}
                   </p>
                 </Col>
 
                 <Col lg={7} sm={24} className="text-right">
-                  <img
-                    src={getBikeImage(booking.bike)}
-                    alt={getBike(booking.bike)?.name}
-                    style={{ width: "100%" }}
-                  />
+                  <div className="w-full h-48 overflow-hidden">
+                    <img
+                      src={getBikeImage(booking.bike)}
+                      alt={getBike(booking.bike)?.name}
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
                 </Col>
               </Row>
-            ))}
-          </Row>
+            </div>
+          ))}
         </Col>
       </Row>
     </DefaultLayout>

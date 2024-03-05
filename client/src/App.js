@@ -5,6 +5,7 @@ import BookingBike from "./pages/BookingBike";
 import Login from "./pages/Login";
 import Home from "./pages/Home";
 import MyBooking from "./pages/MyBooking";
+import { Profile } from "./pages/Profile";
 
 function App() {
   const isAuthenticated = Boolean(localStorage.getItem("user"));
@@ -26,6 +27,14 @@ function App() {
         <Route
           path="/register"
           element={isAuthenticated ? <Navigate to="/" /> : <Register />}
+        />
+        <Route
+          path="/profile/:id"
+          element={
+            <ProtectedRoute>
+              <Profile/>
+            </ProtectedRoute>
+          }
         />
         <Route
           path="/bookings"

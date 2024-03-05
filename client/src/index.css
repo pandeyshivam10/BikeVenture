@@ -1,5 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,wght@1,500&display=swap");
-
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 body {
   margin: 0;
   font-family: "Nunito Sans", sans-serif !important;
@@ -36,11 +38,7 @@ backdrop-filter: blur(8.1px);
   z-index: 1;
 }
 
-h1 {
-  font-size: 30x;
-  font-weight: bold;
-  color: rgb(38, 38, 171);
-}
+
 p {
   margin: 5px !important;
 
@@ -81,9 +79,7 @@ p {
   border-radius: 10px;
 }
 
-.btn1 {
-  margin: 10px;
-}
+
 
 .login-form-button {
   margin: 8px;

@@ -52,78 +52,89 @@ function Register() {
 
   return (
     <DefaultLayout>
-      <div className="login">
-        <Form
-          form={form} // Pass the form instance to the Form component
-          onFinish={handleSubmit}
-          className="login-form"
-          layout="vertical"
-        >
-          <h2 className="abc"> SignUp</h2>
-          <hr />
+      <div className="flex justify-center items-center h-screen">
+        <div className="w-full max-w-md">
+          <Form
+            form={form} // Pass the form instance to the Form component
+            onFinish={handleSubmit}
+            layout="vertical"
+            className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 transition-transform hover:scale-105"
+          >
+            <h2 className="text-3xl mb-4">SignUp</h2>
+            <hr className="mb-6" />
 
-          <Form.Item
-            name="name"
-            rules={[{ required: true, message: "Please enter your name" }]}
-          >
-            <Input prefix={<UserOutlined />} placeholder="Name" />
-          </Form.Item>
-
-          <Form.Item
-            name="email"
-            rules={[
-              { required: true, message: "Please Provide your email" },
-              { type: "email", message: "Please enter a valid email address" },
-            ]}
-          >
-            <Input prefix={<MailOutlined />} placeholder="Email" />
-          </Form.Item>
-
-          <Form.Item
-            name="username"
-            rules={[{ required: true, message: "Please input your username!" }]}
-          >
-            <Input prefix={<UserAddOutlined />} placeholder="Username" />
-          </Form.Item>
-          <Form.Item
-            name="password"
-            rules={[
-              { required: true, message: "Please input your password!" },
-              { validator: validatePassword },
-            ]}
-          >
-            <Input.Password prefix={<LockOutlined />} placeholder="Password" />
-          </Form.Item>
-          <Form.Item
-            name="cpassword"
-            rules={[
-              { required: true, message: "Please input your password!" },
-              { validator: validateConfirmPassword },
-            ]}
-            validateStatus={passwordMatch ? "success" : "error"}
-            help={!passwordMatch && "Passwords do not match."}
-          >
-            <Input.Password
-              prefix={<LockOutlined />}
-              placeholder="Confirm Password"
-            />
-          </Form.Item>
-
-          <Form.Item>
-            <Button
-              type="primary"
-              htmlType="submit"
-              className="login-form-button"
-              style={{ background: "black" }}
+            <Form.Item
+              name="name"
+              rules={[{ required: true, message: "Please enter your name" }]}
             >
-              Register
-            </Button>
-            <label>Or</label>{" "}
-            <a style={{ color: "yellow" }} href="/login">
-              Login now!
-            </a>
-          </Form.Item>
-        </Form>
+              <Input prefix={<UserOutlined />} placeholder="Name" />
+            </Form.Item>
+
+            <Form.Item
+              name="email"
+              rules={[
+                { required: true, message: "Please Provide your email" },
+                {
+                  type: "email",
+                  message: "Please enter a valid email address",
+                },
+              ]}
+            >
+              <Input prefix={<MailOutlined />} placeholder="Email" />
+            </Form.Item>
+
+            <Form.Item
+              name="username"
+              rules={[
+                { required: true, message: "Please input your username!" },
+              ]}
+            >
+              <Input prefix={<UserAddOutlined />} placeholder="Username" />
+            </Form.Item>
+            <Form.Item
+              name="password"
+              rules={[
+                { required: true, message: "Please input your password!" },
+                { validator: validatePassword },
+              ]}
+            >
+              <Input.Password
+                prefix={<LockOutlined />}
+                placeholder="Password"
+              />
+            </Form.Item>
+            <Form.Item
+              name="cpassword"
+              rules={[
+                { required: true, message: "Please input your password!" },
+                { validator: validateConfirmPassword },
+              ]}
+              validateStatus={passwordMatch ? "success" : "error"}
+              help={!passwordMatch && "Passwords do not match."}
+            >
+              <Input.Password
+                prefix={<LockOutlined />}
+                placeholder="Confirm Password"
+              />
+            </Form.Item>
+
+            <Form.Item>
+              <Button
+                type="primary"
+                htmlType="submit"
+                className="w-full bg-black text-white font-bold py-2 px-4 rounded hover:bg-gray-800 transition-colors duration-300"
+              >
+                Register
+              </Button>
+              <p className="text-center mt-2">
+                Or{" "}
+                <a href="/login" className="text-yellow-500 hover:underline">
+                  Login now!
+                </a>
+              </p>
+            </Form.Item>
+          </Form>
+        </div>
       </div>
     </DefaultLayout>
   );
