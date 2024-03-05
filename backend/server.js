@@ -11,18 +11,15 @@ app.use(express.json());
 
 app.use(cors());
 
-const origin =
-  process.env.NODE_ENV === "production"
-    ? "https://bike-venture.vercel.app"
-    : "http://localhost:3000";
 
 app.use(
   cors({
-    origin: origin,
+    origin: process.env.ORIGIN,
     methods: ["GET", "POST"],
     allowedHeaders: ["Content-Type", "Authorization"],
   })
 );
+
 
 app.use("/api/bikes/", require("./routes/bikeRoutes"));
 app.use("/api/users", require("./routes/userRoutes"));
