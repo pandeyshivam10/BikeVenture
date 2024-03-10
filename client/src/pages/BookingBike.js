@@ -109,8 +109,7 @@ function BookingBike() {
   return (
     <DefaultLayout>
       {loading && <Loader />}
-  
-      <div className="container mx-auto px-4 py-8">
+      <div className="container  px-4 py-8 flex justify-center">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
           <div className="flex justify-center">
             {bike && (
@@ -124,30 +123,42 @@ function BookingBike() {
           <div className="mt-5">
             {bike && (
               <div className="text-right">
-                <h1 className=" fancy text-3xl font-semibold mb-4">{bike.name}</h1>
-                <p className="text-lg mb-2">Rent Per Hour: ₹{bike.rentPerHour}</p>
+                <h1 className=" fancy text-3xl font-semibold mb-4">
+                  {bike.name}
+                </h1>
+                <p className="text-lg mb-2">
+                  Rent Per Hour: ₹{bike.rentPerHour}
+                </p>
                 <p className="text-lg mb-2">Fuel Type: {bike.fuelType}</p>
                 <p className="text-lg mb-2">Max Persons: {bike.capacity}</p>
               </div>
             )}
-  
+
             <div className=" text-right mt-8">
-              <h1 className=" fancy text-2xl font-semibold mb-4">Selected Time Slot</h1>
+              <h1 className=" fancy text-2xl font-semibold mb-4">
+                Selected Time Slot
+              </h1>
               <RangePicker
-                disabledDate={(current) => current && current < moment().startOf("day")}
+                disabledDate={(current) =>
+                  current && current < moment().startOf("day")
+                }
                 showTime={{ format: "HH:mm" }}
                 format="MMM DD YYYY HH:mm"
                 onChange={selectTimeSlot}
                 okButtonProps={{ className: "text-black" }}
               />
-  
+
               {isDatePickerSelected && (
                 <div className="mt-4">
-                  <p className="text-lg mb-2">Total Hours: <b>{hour}</b> Hours</p>
+                  <p className="text-lg mb-2">
+                    Total Hours: <b>{hour}</b> Hours
+                  </p>
                   {bike && (
-                    <p className="text-lg mb-2">Rent Per Hour: <b>₹{bike.rentPerHour}</b></p>
+                    <p className="text-lg mb-2">
+                      Rent Per Hour: <b>₹{bike.rentPerHour}</b>
+                    </p>
                   )}
-  
+
                   <Checkbox
                     className="text-lg mb-4"
                     onChange={(e) => {
@@ -156,9 +167,11 @@ function BookingBike() {
                   >
                     Driver Required
                   </Checkbox>
-  
-                  <h2 className="text-xl mb-2">Total Amount: <b>₹{totalAmount}</b></h2>
-  
+
+                  <h2 className="text-xl mb-2">
+                    Total Amount: <b>₹{totalAmount}</b>
+                  </h2>
+
                   <button
                     onClick={() => onToken()}
                     className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
@@ -173,7 +186,6 @@ function BookingBike() {
       </div>
     </DefaultLayout>
   );
-  
 }
 
 export default BookingBike;

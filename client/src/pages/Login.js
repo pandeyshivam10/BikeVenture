@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import DefaultLayout from "../components/DefaultLayout";
 import { Form, Input, Button } from "antd";
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
@@ -12,12 +12,7 @@ function Login() {
     dispatch(userLogin(values));
   };
 
-  useEffect(() => {
-    document.body.style.overflow = "hidden";
-    return () => {
-      document.body.style.overflow = "auto";
-    };
-  }, []);
+ 
 
   return (
     <DefaultLayout>

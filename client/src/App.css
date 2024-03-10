@@ -54,3 +54,14 @@
   -webkit-box-shadow: 0 2px 0 rgba(0,0,0,0.045);
   box-shadow: 0 2px 0 rgba(0,0,0,0.045);
 }
+
+.container {
+  margin-top: 50px;
+}
+
+/* for mobile view */
+@media (max-width: 500px) {
+  .container {
+    margin-top: 0;
+  }
+}

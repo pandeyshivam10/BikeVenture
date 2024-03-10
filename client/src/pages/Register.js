@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, {  useState } from "react";
 import DefaultLayout from "../components/DefaultLayout";
 import { Form, Input, Button } from "antd";
 import {
@@ -22,12 +22,7 @@ function Register() {
 
   const [passwordMatch, setPasswordMatch] = useState(true);
 
-  useEffect(() => {
-    document.body.style.overflow = "hidden";
-    return () => {
-      document.body.style.overflow = "auto";
-    };
-  }, []);
+ 
 
   const passwordMinLength = 8;
 
