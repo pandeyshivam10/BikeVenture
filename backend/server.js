@@ -25,5 +25,6 @@ app.use("/api/bikes/", require("./routes/bikeRoutes"));
 app.use("/api/users", require("./routes/userRoutes"));
 app.use("/api/bookings", require("./routes/bookingRoutes"));
 
+
 app.get("/", (req, res) => res.send("Hello World!"));
 app.listen(port, () => console.log(`Example app listening on port ${port}!`));

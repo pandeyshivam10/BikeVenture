@@ -7,9 +7,7 @@ const router = express.Router();
 
 const User = require("../models/userModel");
 
-
-
-router.post("/login",async (req, res) => {
+router.post("/login", async (req, res) => {
   const { username, password } = req.body;
 
   try {
@@ -69,7 +67,7 @@ router.post("/checkUsername", async (req, res) => {
   }
 });
 
-router.post("/checkEmail" , async (req, res) => {
+router.post("/checkEmail", async (req, res) => {
   const { email } = req.body;
 
   try {
@@ -83,6 +81,38 @@ router.post("/checkEmail" , async (req, res) => {
   } catch (error) {
     console.error(error);
     return res.status(500).json({ error: "Something went wrong." });
+  }
+});
+
+router.patch("/edit/:id", async (req, res) => {
+  const id = req.params.id;
+
+  const { name, email, username } = req.body;
+
+  try {
+    const emailPresent = await User.findOne({ email });
+    const usernamePresent = await User.findOne({ username });
+
+    if (emailPresent && emailPresent._id.toString() !== id) {
+      return res.status(409).json({ error: "Email already exists" });
+    }
+
+    if (usernamePresent && usernamePresent._id.toString() !== id) {
+      return res.status(410).json({ error: "Username already exists" });
+    }
+
+    await User.findByIdAndUpdate(id, { name, email, username }, { new: true });
+
+    const senduser = await User.findById(id);
+
+    if (!senduser) {
+      return res.status(404).json({ error: "User not found" });
+    }
+
+    return res.status(200).json({ senduser });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ error: "Internal server error" });
   }
 });
 

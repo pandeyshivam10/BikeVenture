@@ -6,6 +6,7 @@ import Login from "./pages/Login";
 import Home from "./pages/Home";
 import MyBooking from "./pages/MyBooking";
 import { Profile } from "./pages/Profile";
+import Edit from "./pages/Edit";
 
 function App() {
   const isAuthenticated = Boolean(localStorage.getItem("user"));
@@ -32,7 +33,7 @@ function App() {
           path="/profile/:id"
           element={
             <ProtectedRoute>
-              <Profile/>
+              <Profile />
             </ProtectedRoute>
           }
         />
@@ -41,6 +42,14 @@ function App() {
           element={
             <ProtectedRoute>
               <MyBooking />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/edit/:id"
+          element={
+            <ProtectedRoute>
+              <Edit/>
             </ProtectedRoute>
           }
         />
