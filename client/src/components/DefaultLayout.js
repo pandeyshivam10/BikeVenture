@@ -9,7 +9,6 @@ import { useEffect } from "react";
 import { message } from "antd";
 
 function DefaultLayout(props) {
-  
   const location = useLocation();
 
   useEffect(() => {
@@ -65,15 +64,15 @@ function DefaultLayout(props) {
         className="header bs1"
         style={{ position: "sticky", top: 0, zIndex: 1000 }}
       >
-        <Row gutter={16} justify="center">
+        <Row gutter={16} justify="center" className="pl-5">
           <Col lg={20} sm={24} xs={24}>
-            <div className="d-flex justify-content-between">
+            <div className="d-flex  justify-content-between">
               <a
                 href="/"
                 className="flex items-center justify-center text-center h-12 w-12 rounded-full bg-blue-500 text-white font-bold text-xl shadow-lg hover:shadow-xl transition duration-300 ease-in-out"
                 style={{ textDecoration: "none" }} // inline style to remove underline
               >
-                <h1 className="text-3xl font-bold text-gray-800 leading-none">
+                <h1 className=" text-3xl font-bold text-gray-800 leading-none">
                   <span className="text-blue-500">Bike</span>
                   <span className="text-white">Venture</span>
                 </h1>
@@ -83,8 +82,10 @@ function DefaultLayout(props) {
                 <Space direction="vertical">
                   <Space wrap>
                     <Dropdown menu={{ items }} placement="bottomRight">
-                      <Button className="loginbtn">
-                        {user.data.user.username}
+                      <Button className="loginbtn pl-2">
+                        <span className="username">
+                          {user.data.user.username}
+                        </span>
                         {<MenuOutlined />}
                       </Button>
                     </Dropdown>

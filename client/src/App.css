@@ -64,4 +64,8 @@
   .container {
     margin-top: 0;
   }
+  .ant-btn .username {
+    display: none; 
+  }
 }
+
