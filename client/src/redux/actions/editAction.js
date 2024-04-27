@@ -2,8 +2,8 @@ import axios from "axios";
 import { message } from "antd";
 
 const api = axios.create({
-  baseURL: "https://scary-earmuffs-foal.cyclic.app/",
-  // baseURL: "http://localhost:5000",
+  // baseURL: "https://scary-earmuffs-foal.cyclic.app/",
+  baseURL: "http://localhost:5000",
 });
 
 export const editUser = (id, reqObj) => async (dispatch) => {

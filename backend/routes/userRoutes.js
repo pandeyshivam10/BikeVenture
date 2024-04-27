@@ -7,6 +7,54 @@ const router = express.Router();
 
 const User = require("../models/userModel");
 
+router.post("/googlelogin", async (req, res) => {
+  const { name, email, password } = req.body;
+
+  try {
+    const existingUser = await User.findOne({ email });
+
+    if (existingUser) {
+      const token = jwt.sign({ id: existingUser._id }, process.env.JWT_SECRET, {
+        expiresIn: process.env.JWT_EXPIRES_IN,
+      });
+
+      return res.status(200).json({
+        token,
+        data: {
+          user: existingUser,
+        },
+      });
+    }
+
+    const parts = email.split("@");
+
+    const newUser = new User({
+      username: parts[0],
+      email,
+      password,
+      cpassword: password,
+      name,
+    });
+
+    await newUser.save();
+
+    const token = jwt.sign({ id: newUser._id }, process.env.JWT_SECRET, {
+      expiresIn: process.env.JWT_EXPIRES_IN,
+    });
+
+    return res.status(201).json({
+      token,
+      data: {
+        user: newUser,
+      },
+    });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ error: error.message }); // Return the actual error message
+  }
+});
+
+
 router.post("/login", async (req, res) => {
   const { username, password } = req.body;
 

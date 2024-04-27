@@ -4,15 +4,42 @@ import { Form, Input, Button } from "antd";
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
 import { useDispatch } from "react-redux";
 import { userLogin } from "../redux/actions/userActions";
+import { GoogleOutlined } from "@ant-design/icons";
+import { googleLogin } from "../redux/actions/userActions";
+
+import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 
 function Login() {
   const dispatch = useDispatch();
+  const handleSignIn = () => {
+    const auth = getAuth();
+    const provider = new GoogleAuthProvider();
+    signInWithPopup(auth, provider)
+      .then((result) => {
+        const credential = GoogleAuthProvider.credentialFromResult(result);
+        const token = credential.accessToken;
+        // console.log(token);
+        const user = result.user;
+        const reqObj = {
+          name: user.displayName,
+          password: user.uid,
+          email: user.email,
+        };
+
+        dispatch(googleLogin(reqObj));
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        const email = error.email;
+        const credential = GoogleAuthProvider.credentialFromError(error);
+        console.log(errorCode, errorMessage, email, credential);
+      });
+  };
 
   const handleSubmit = (values) => {
     dispatch(userLogin(values));
   };
-
- 
 
   return (
     <DefaultLayout>
@@ -52,17 +79,25 @@ function Login() {
               >
                 Log in
               </Button>
-              <p className="text-center mt-2">
-                Or{" "}
+              <p className="text-right mt-2 flex-row-reverse space-x-20 ">
                 <a href="/register" className="text-yellow-500 hover:underline">
-                  register now!
+                 Register Now !
                 </a>
+                {/* <a
+                  href="/forget-password"
+                  className="text-red-500 hover:underline"
+                >
+                  Forget Password ?
+                </a> */}
               </p>
             </Form.Item>
-            <div className="test text-center">
-              <h5>Test Username: user1234</h5>
-              <h5>Test Password: 12345678</h5>
-            </div>
+
+            <Button
+              onClick={handleSignIn}
+              icon={<GoogleOutlined style={{ fontSize: "24px" }} />}
+            >
+              Sign in with Google
+            </Button>
           </Form>
         </div>
       </div>
