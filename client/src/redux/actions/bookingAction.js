@@ -2,8 +2,8 @@ import { message } from "antd";
 import axios from "axios";
 
 const api = axios.create({
-  // baseURL: "https://scary-earmuffs-foal.cyclic.app/",
-  baseURL: "http://localhost:5000",
+  baseURL: "https://scary-earmuffs-foal.cyclic.app/",
+  // baseURL: "http://localhost:5000",
 });
 
 // Get token from localStorage and parse it as JSON

@@ -1,8 +1,8 @@
 import axios from "axios";
 
 const api = axios.create({
-  // baseURL: "https://scary-earmuffs-foal.cyclic.app/",
-  baseURL: "http://localhost:5000",
+  baseURL: "https://scary-earmuffs-foal.cyclic.app/",
+  // baseURL: "http://localhost:5000",
 });
 
 const user = JSON.parse(localStorage.getItem("user"));
