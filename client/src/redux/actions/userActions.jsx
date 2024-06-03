@@ -6,6 +6,8 @@ const api = axios.create({
   // baseURL: "http://localhost:5000",
 });
 
+// change baseURL to your own URL
+
 export const googleLogin = (reqObj) => async (dispatch) => {
   dispatch({ type: "loading", payload: true });
 
