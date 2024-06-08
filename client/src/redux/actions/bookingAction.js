@@ -2,7 +2,7 @@ import { message } from "antd";
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: "https://scary-earmuffs-foal.cyclic.app/",
+  baseURL: "https://bikeventure-1.onrender.com/",
   // baseURL: "http://localhost:5000",
 });
 

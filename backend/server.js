@@ -13,7 +13,7 @@ app.use(cors());
 
 app.use(
   cors({
-    origin: process.env.ORIGIN, // ensure ORIGIN is set in your .env
+    origin: process.env.ORIGIN, 
     methods: ["GET", "POST"],
     allowedHeaders: ["Content-Type", "Authorization"],
   })

@@ -7,14 +7,14 @@ import { userLogin } from "../redux/actions/userActions";
 import { GoogleOutlined } from "@ant-design/icons";
 import { googleLogin } from "../redux/actions/userActions";
 
-import { getAuth, signInWithRedirect, GoogleAuthProvider } from "firebase/auth";
+import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 
 function Login() {
   const dispatch = useDispatch();
   const handleSignIn = () => {
     const auth = getAuth();
     const provider = new GoogleAuthProvider();
-    signInWithRedirect(auth, provider)
+    signInWithPopup(auth, provider)
       .then((result) => {
         const credential = GoogleAuthProvider.credentialFromResult(result);
         const token = credential.accessToken;
