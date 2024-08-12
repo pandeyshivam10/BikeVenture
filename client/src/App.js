@@ -6,6 +6,7 @@ import Login from "./pages/Login";
 import Home from "./pages/Home";
 import MyBooking from "./pages/MyBooking";
 import { Profile } from "./pages/Profile";
+import Forget from "./pages/Forget";
 import Edit from "./pages/Edit";
 
 function App() {
@@ -24,6 +25,10 @@ function App() {
         <Route
           path="/login"
           element={isAuthenticated ? <Navigate to="/" /> : <Login />}
+        />
+        <Route
+          path="/forget-password"
+          element={isAuthenticated ? <Navigate to="/" /> : <Forget />}
         />
         <Route
           path="/register"

@@ -25,7 +25,7 @@ export const googleLogin = (reqObj) => async (dispatch) => {
     message.error("Something went wrong");
     dispatch({ type: "loading", payload: false });
   }
-}
+};
 
 export const userLogin = (reqObj) => async (dispatch) => {
   dispatch({ type: "loading", payload: true });
@@ -82,6 +82,57 @@ export const userRegister = (reqObj) => async (dispatch) => {
   } catch (error) {
     console.log(error);
     message.error("Something went wrong");
+    dispatch({ type: "loading", payload: false });
+  }
+};
+
+export const getOTP = (reqObj) => async (dispatch) => {
+  dispatch({ type: "loading", payload: true });
+
+  try {
+    const response = await api.post("/api/users/getOTP", reqObj);
+    dispatch({ type: "setValidEmail", payload: true });
+    console.log(response);
+    message.success("Otp Sent to your registered email")
+    dispatch({ type: "loading", payload: false });
+  } catch (error) {
+    console.error(error);
+    dispatch({ type: "loading", payload: false });
+  }
+};
+
+
+export const verifyOtp =  (reqObj) => async (dispatch) => {
+  dispatch({ type: "loading", payload: true });
+
+  try {
+    const response = await api.post("/api/users/verifyOtp", reqObj);
+    console.log(response)
+    dispatch({ type: "setValidOtp", payload: true });
+    message.success("Otp Matched");
+    console.log(response);
+    dispatch({ type: "loading", payload: false });
+  } catch (error) {
+    console.error(error);
+    message.error("Otp not matched");
+    dispatch({ type: "loading", payload: false });
+  }
+};
+
+
+export const passwordChanged = (reqObj) => async (dispatch) => {
+  dispatch({ type: "loading", payload: true });
+
+  try {
+    const response = await api.post("/api/users/changePassword", reqObj);
+    console.log(response);
+    message.success("Password Changed Succesfully")
+    setTimeout(() => {
+      window.location.href = "/login";
+    }, 500);
+    dispatch({ type: "loading", payload: false });
+  } catch (error) {
+    console.error(error);
     dispatch({ type: "loading", payload: false });
   }
 };
